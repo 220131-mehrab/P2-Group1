@@ -360,44 +360,28 @@ function DrawAll() {
   }
 
   if (gameChoice == 1) {
-    DrawRectangle(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT, "Clear")
-    gameOneReset = false;
-    gameTwoReset = true;
-    gameThreeReset = true;
 
-    if (squareDancePhase1) {
-      DrawRectangle(squareX, squareY, SQUARE_WIDTH, SQUARE_HEIGHT, "Black");
-      if (squareRight <= CANVAS_WIDTH)
-        squareX += squareSpeed;
-      else {
-        squareDancePhase1 = false;
-        squareDancePhase2 = true;
-      }
-    } else if (squareDancePhase2) {
-      DrawRectangle(squareX, squareY, SQUARE_WIDTH, SQUARE_HEIGHT, "Black");
-      if (squareBottom <= CANVAS_HEIGHT)
-        squareY += squareSpeed;
-      else {
-        squareDancePhase2 = false;
-        squareDancePhase3 = true;
-      }
-    } else if (squareDancePhase3) {
-      DrawRectangle(squareX, squareY, SQUARE_WIDTH, SQUARE_HEIGHT, "Black");
-      if (squareX >= 0)
-        squareX -= squareSpeed;
-      else {
-        squareDancePhase3 = false;
-        squareDancePhase4 = true;
-      }
-    } else if (squareDancePhase4) {
-      DrawRectangle(squareX, squareY, SQUARE_WIDTH, SQUARE_HEIGHT, "Black");
-      if (squareY >= 0)
-        squareY -= squareSpeed;
-      else {
-        squareDancePhase4 = false;
-        squareDancePhase1 = true;
-      }
-    }
+    const PADDLE_WIDTH = 100;
+    const PADDLE_THICKNESS = 10;
+    const PADDLE_DIST_FROM_EDGE = 60;
+    const PADDLE_HEIGHT = 10;
+
+    let paddle1Y = 50;
+    let paddle1Top, paddle1Bottom, paddle1Right, paddle1Center;
+    let paddleThickness = 20;
+    let ballX = 75;
+    let ballY = 75;
+    let ballSpeedX = 5;
+    let ballSpeedY = 7;
+    let paddleX = 400;
+    let canvas, canvasContext;
+
+    DrawRectangle(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT, "Clear")
+    DrawRectangle(0,0, CANVAS_WIDTH, CANVAS_HEIGHT, 'black'); //background
+    DrawRectangle(160, 380, PADDLE_WIDTH, PADDLE_HEIGHT, '#0080ee'); // Left Player
+
+
+
   } else if (gameChoice == 2) {
     DrawRectangle(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT, "#9bbc0f")
     DrawTracks();
