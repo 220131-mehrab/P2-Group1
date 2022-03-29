@@ -1,13 +1,3 @@
-# Our basic game interface
-
-Testing...
-
-
-
-
-
-
-
 
 # Frontend
 
