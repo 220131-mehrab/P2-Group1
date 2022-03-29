@@ -149,6 +149,12 @@ let row3 = [0, 0, 0, 0, 0];
 let row4 = [0, 0, 0, 0, 0];
 let row5 = [0, 0, 0, 0, 0];
 
+let row1Ex = [1, 1, 1, 1, 1];
+let row2Ex = [1, 1, 1, 1, 1];
+let row3Ex = [1, 1, 1, 1, 1];
+let row4Ex = [1, 1, 1, 1, 1];
+let row5Ex = [1, 1, 1, 1, 1];
+
 function ResetMineField() {
   row1 = [0, 0, 0, 0, 0];
   row2 = [0, 0, 0, 0, 0];
@@ -158,6 +164,7 @@ function ResetMineField() {
 }
 
 function ResetMineSquares() {
+  let valueToPrint: string = '';
   for (let i = 0; i < 5; i++) {
     for (let j = 0; j < 5; j++) {
       // if j is even, squareColor is black, else white
@@ -166,10 +173,29 @@ function ResetMineSquares() {
       else
         squareColor = j % 2 == 0 ? "white" : "black";
       DrawRectangle(i * 80, j * 80, 80, 80, squareColor);
-
     }
   }
-}
+      for (let k = 0; k < 5; k++) {
+        let squareColorOdd = k % 2 == 0 ? "white" : "black";
+        let squareColorEven = k % 2 == 0 ? "black" : "white";
+
+        let stringConvert = row1[k] == 10 ? "\u{1F4A3}" : row1[k].toString();
+        DrawText(stringConvert, k * 80 + 30, 40, "24px Arial", squareColorOdd);
+
+        stringConvert = row2[k] == 10 ? "\u{1F4A3}" : row2[k].toString();
+        DrawText(stringConvert, k * 80 + 30, 120, "24px Arial", squareColorEven);
+
+        stringConvert = row3[k] == 10 ? "\u{1F4A3}" : row3[k].toString();
+        DrawText(stringConvert, k * 80 + 30, 200, "24px Arial", squareColorOdd);
+
+        stringConvert = row4[k] == 10 ? "\u{1F4A3}" : row4[k].toString();
+        DrawText(stringConvert, k * 80 + 30, 280, "24px Arial", squareColorEven);
+
+        stringConvert = row5[k] == 10 ? "\u{1F4A3}" : row5[k].toString();
+        DrawText(stringConvert, k * 80 + 30, 360, "24px Arial", squareColorOdd);
+      }
+
+  }
 
 
 
@@ -570,7 +596,6 @@ function DrawAll() {
     gameTwoReset = true;
     gameThreeReset = false;
     ResetMineField();
-    ResetMineSquares();
 
     if (!minesSet && gameChoice == 3) {
       let textInput2 = grabTextArea("textField2");
@@ -614,15 +639,40 @@ function DrawAll() {
               break;
           }
           textInput2.value = row1.toString() + "\n" + row2.toString() + "\n" + row3.toString() + "\n" + row4.toString() + "\n" + row5.toString();
+          ResetMineSquares();
           minesSet = true;
         }
       }
-      for (let i=0; i<5; i++) {
-        for (let j=0; j<5; j++) {
-        //   if (i == 0)
-        //     DrawText(i * 80)
-        }
-      }
+      // let color: string = "white";
+      // for (let i=0; i<5; i++) {
+      //   for (let j=0; j<5; j++) {
+      //     if (i % 2 == 0 && j % 2 == 0)
+      //       color = "white";
+      //     else if (i % 2 != 0 && j % 2 == 0)
+      //       color = "black";
+      //      if (i == 0) {
+      //        if (row1[j] == 10)
+      //          DrawText("&#x1F4A3;", i * 80, j * 80, color, "12px Arial");
+      //      }
+      //      else if (i == 1) {
+      //        if (row2[j] == 10)
+      //          DrawText("&#x1F4A3;", i * 80, j * 80, color, "30px Arial");
+      //      }
+      //      else if (i == 2) {
+      //        if (row3[j] == 10)
+      //          DrawText("&#x1F4A3;", i * 80, j * 80, color, "30px Arial");
+      //      }
+      //      else if (i == 3) {
+      //        if (row4[j] == 10)
+      //          DrawText("&#x1F4A3;", i * 80, j * 80, color, "30px Arial");
+      //      }
+      //      else if (i == 4) {
+      //        if (row5[j] == 10)
+      //          DrawText("&#x1F4A3;", i * 80, j * 80, color, "30px Arial");
+      //      }
+      //
+      //   }
+      // }
     }
   }
 
