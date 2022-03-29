@@ -3,7 +3,7 @@ import { Component, Input } from '@angular/core';
 import { Product } from '../products';
 import { products } from '../products';
 
-let gameChoice = 1;
+let gameChoice = 2;
 let startOver = false;
 
 @Component({

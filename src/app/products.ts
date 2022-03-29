@@ -8,9 +8,9 @@ export interface Product {
 export const products = [
   {
     id: 1,
-    name: 'Square Dancing (for nerds):\nWatch this square get down!',
+    name: 'Pong!',
     price: 1,
-    description: 'Square Game'
+    description: 'Pong'
   },
 
   { id: 2,
