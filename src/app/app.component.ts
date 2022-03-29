@@ -359,7 +359,7 @@ function DrawAll() {
     gameThreeReset = false;
   }
 
-  if (gameChoice == 1) {
+  if (gameChoice == 1) {  // Pong Game
 
     const PADDLE_WIDTH = 100;
     const PADDLE_THICKNESS = 10;
@@ -380,9 +380,7 @@ function DrawAll() {
     DrawRectangle(160, 380, PADDLE_WIDTH, PADDLE_HEIGHT, '#0080ee'); // Bottom paddle
 
 
-
-
-  } else if (gameChoice == 2) {
+  } else if (gameChoice == 2) { // Megaman Game
     DrawRectangle(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT, "#9bbc0f")
     DrawTracks();
     stageImage = new Image();
@@ -591,7 +589,7 @@ function DrawAll() {
     gameThreeReset = true;
 
 
-  } else if (gameChoice == 3) {
+  } else if (gameChoice == 3) { // Minesweeper
     gameOneReset = true;
     gameTwoReset = true;
     gameThreeReset = false;
