@@ -350,9 +350,9 @@ function DrawAll() {
     let paddleX = 400;
     let canvas, canvasContext;
 
-    DrawRectangle(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT, "Clear")
-    DrawRectangle(0,0, CANVAS_WIDTH, CANVAS_HEIGHT, 'black'); //background
-    DrawRectangle(160, 380, PADDLE_WIDTH, PADDLE_HEIGHT, '#0080ee'); // Left Player
+    DrawRectangle(0,0, CANVAS_WIDTH, CANVAS_HEIGHT, 'black'); // Background
+    DrawRectangle(160, 380, PADDLE_WIDTH, PADDLE_HEIGHT, '#0080ee'); // Bottom paddle
+
 
 
 
