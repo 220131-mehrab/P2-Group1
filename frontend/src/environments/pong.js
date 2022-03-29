@@ -26,7 +26,6 @@ let ballSpeedX = 15;
 let ballSpeedY = 7;
 let ballSpeed;
 
-
 let ballText = document.getElementById('ball');
 let ballText2 = document.getElementById('ballAtts');
 
