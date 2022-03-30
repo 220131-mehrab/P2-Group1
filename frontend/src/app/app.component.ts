@@ -155,7 +155,7 @@ let grabTextArea = (id: 'textField2') : HTMLTextAreaElement => {
 *
  */
 let mines = 5;
-let minesSet = true;
+let minesSet = false;
 
 let squareColor = '#00ff00';
 let row1 = [0, 0, 0, 0, 0];
@@ -179,6 +179,7 @@ function ResetMineField() {
 }
 
 function ResetMineSquares() {
+  // Draws the black and white squares of the board.
   let valueToPrint: string = '';
   for (let i = 0; i < 5; i++) {
     for (let j = 0; j < 5; j++) {
@@ -211,12 +212,6 @@ function ResetMineSquares() {
       }
 
   }
-
-
-
-
-
-
 
 /*
 *   E
@@ -636,13 +631,16 @@ function DrawAll() {
     gameThreeReset = false;
     ResetMineField();
 
+    // if the mines haven't been placed yet, nor the number of bombs on each square, and the active game is Minesweeper.
     if (!minesSet && gameChoice == 3) {
       let textInput2 = grabTextArea("textField2");
       let mineCount = 0;
       let x: number;
       let y: number;
       while (mineCount < 10) {
+        // Gets a random number between 0 and 1, multiplies by 100 to get a whole number, and truncates the decimal.
         x = Math.trunc((Math.random()) * 100);
+        // Places the bombs in the arrays for the board.
         if (x <= 24) {// if (row1[x] == 0) {
           y = (x % 5).valueOf();
           switch (Math.trunc(x / 5)) {
@@ -677,46 +675,200 @@ function DrawAll() {
               }
               break;
           }
+
           textInput2.value = row1.toString() + "\n" + row2.toString() + "\n" + row3.toString() + "\n" + row4.toString() + "\n" + row5.toString();
+
+          let squaresChecked = 0;
+          let squareOn = 0;
+          let bombsNearSquare = 0;
+          // This variable has a type for the function return to run.
+          let squareOnValue:number = 0;
+          // These variables hold either -1, 0, 10, or some other positive number.
+          let squareLeft = -1, squareRight = -1, squareDown = -1, squareUp = -1, squareUpLeft = -1, squareUpRight = -1, squareDownLeft = -1, squareDownRight = -1;
+
+          // GetValueOfSquare will return the value of the squareOn parameter.
+          const GetValueOfSquare = (squareOnF:number):number => {
+            let rowNumber = Math.trunc(squareOnF / 5);
+            let rowPOVColumn = squareOnF % 5;
+            switch (rowNumber) {
+              case 0:
+                return row1[rowPOVColumn];
+                break;
+              case 1:
+                return row2[rowPOVColumn];
+                break;
+              case 2:
+                return row3[rowPOVColumn];
+                break;
+              case 3:
+                return row4[rowPOVColumn];
+                break;
+              case 4:
+                return row5[rowPOVColumn];
+                break;
+              default:
+                return 0;
+                break;
+            }
+          }
+
+
+          // function SetValueOfSquare(x:number, setSquare:number) {
+          //   let rowNumberSV = Math.trunc(x / 5);
+          //   let rowPOVColumnSV = x % 5;
+          //   switch (rowNumberSV) {
+          //     case 0:
+          //       row1[rowPOVColumnSV] = setSquare;
+          //       break;
+          //     case 1:
+          //       row2[rowPOVColumnSV] = setSquare;
+          //       break;
+          //     case 2:
+          //       row3[rowPOVColumnSV] = setSquare;
+          //       break;
+          //     case 3:
+          //       row4[rowPOVColumnSV] = setSquare;
+          //       break;
+          //     case 4:
+          //       row5[rowPOVColumnSV] = setSquare;
+          //       break;
+          //     default:
+          //       break;
+          //   }
+          // }
+
+          for(let x=0; x < 25; x++) {
+            if (GetValueOfSquare(squareOn) != 10) {
+              squareLeft = x - 1 >= 0 ? GetValueOfSquare(x - 1) : -1;
+              squareRight = x + 1 <= 24 ? GetValueOfSquare(x + 1) : -1;
+              squareUp = x - 5 >=0 ? GetValueOfSquare(x - 5) : -1;
+              squareDown = x + 5 <= 24 ? GetValueOfSquare(x + 5) : -1;
+              squareUpLeft = x - 6 >= 0 ? GetValueOfSquare(x - 6) : -1;
+              squareUpRight = x - 4 >= 0 ? GetValueOfSquare(x - 4) : -1;
+              squareDownLeft = x + 6 <= 24 ? GetValueOfSquare(x + 6) : -1;
+              squareDownRight = x + 4 <= 24 ? GetValueOfSquare(x + 4) : -1;
+
+
+              bombsNearSquare = squareLeft == 10 ? bombsNearSquare + 1 : bombsNearSquare + 0;
+              bombsNearSquare = squareRight == 10 ? bombsNearSquare + 1 : bombsNearSquare + 0;
+              bombsNearSquare = squareUp == 10 ? bombsNearSquare + 1 : bombsNearSquare + 0;
+              bombsNearSquare = squareDown == 10 ? bombsNearSquare + 1 : bombsNearSquare + 0;
+              bombsNearSquare = squareUpLeft == 10 ? bombsNearSquare + 1 : bombsNearSquare + 0;
+              bombsNearSquare = squareUpRight == 10 ? bombsNearSquare + 1 : bombsNearSquare + 0;
+              bombsNearSquare = squareDownLeft == 10 ? bombsNearSquare + 1 : bombsNearSquare + 0;
+              bombsNearSquare = squareDownRight == 10 ? bombsNearSquare + 1 : bombsNearSquare + 0;
+
+
+              SetValueOfSquare(x, bombsNearSquare);
+
+              squareLeft = -1;
+              squareRight = -1;
+              squareUp = -1;
+              squareDown = -1;
+              squareUpLeft = -1;
+              squareUpRight = -1;
+              squareDownLeft = -1;
+              squareDownRight = -1;
+              bombsNearSquare = 0;
+
+
+
+            }
+          }
+
+          // // making each number around the bombs say how many bombs are around it.
+          // while(squaresChecked < 25) {
+          //   // getting values for the squares surrounding the squareOn.
+          //   squareOnValue = GetValueOfSquare(squareOn);
+          //
+          //   // If not a bomb, evaluate the left box
+          //   if (squareOnValue < 10) {
+          //     if (squareOn - 1 >= 0) {
+          //       // Grab value of square to the left exists.
+          //       squareLeft = GetValueOfSquare(squareOn - 1);
+          //     } else {
+          //       // if there is no square to the left, set it to -1.
+          //       squareLeft = -1;
+          //     }
+          //     // Right
+          //     if (squareOn + 1 <= 24) {
+          //       squareRight = GetValueOfSquare(squareOn + 1);
+          //     } else {
+          //       squareRight = -1;
+          //     }
+          //     // Down
+          //     if (squareOn + 5 <= 24) {
+          //       squareDown = GetValueOfSquare(squareOn + 5);
+          //     } else {
+          //       squareDown = -1;
+          //     }
+          //     // Up
+          //     if (squareOn - 5 >= 0) {
+          //       squareUp = GetValueOfSquare(squareOn - 5);
+          //     } else {
+          //       squareUp = -1;
+          //     }
+          //     // Up Left
+          //     if (squareOn - 6 >= 0) {
+          //       squareUpLeft = GetValueOfSquare(squareOn - 6);
+          //     } else {
+          //       squareUpLeft = -1;
+          //     }
+          //     // Up Right
+          //     if (squareOn - 4 >= 0) {
+          //       squareUpRight = GetValueOfSquare(squareOn - 4);
+          //     } else {
+          //       squareUpRight = -1;
+          //     }
+          //     // Down Left
+          //     if (squareOn + 4 >= 24) {
+          //       squareDownLeft = GetValueOfSquare(squareOn + 4);
+          //     } else {
+          //       squareDownLeft = -1;
+          //     }
+          //     // Down Right
+          //     if (squareOn + 6 >= 24) {
+          //       squareDownRight = GetValueOfSquare(squareOn + 6);
+          //     } else {
+          //       squareDownRight = -1;
+          //     }
+          //
+          //     if (squareLeft == 10) bombsNearSquare++;
+          //     if (squareRight == 10) bombsNearSquare++;
+          //     if (squareDown == 10) bombsNearSquare++;
+          //     if (squareUp == 10) bombsNearSquare++;
+          //     if (squareUpLeft == 10) bombsNearSquare++;
+          //     if (squareUpRight == 10) bombsNearSquare++;
+          //     if (squareDownLeft == 10) bombsNearSquare++;
+          //     if (squareDownRight == 10) bombsNearSquare++;
+          //
+          //
+          //     SetValueOfSquare(bombsNearSquare);
+          //     // textInput2.value = textInput2.value + "squareOn: " + squareOn + ", bombsNearSquare: " + bombsNearSquare + "\n";
+          //
+          //     squareLeft = 0;
+          //     squareRight = 0;
+          //     squareDown = 0;
+          //     squareUp = 0;
+          //     squareUpLeft = 0;
+          //     squareUpRight = 0;
+          //     squareDownLeft = 0;
+          //     squareDownRight = 0;
+          //     bombsNearSquare = 0;
+          //
+          //   }
+          //   // End of While loop increments.
+          //   squareOn++;
+          //   squaresChecked++;
+          // }
+
+          // textInput2.value = row1.toString() + "\n" + row2.toString() + "\n" + row3.toString() + "\n" + row4.toString() + "\n" + row5.toString();
           ResetMineSquares();
           minesSet = true;
         }
       }
-      // let color: string = "white";
-      // for (let i=0; i<5; i++) {
-      //   for (let j=0; j<5; j++) {
-      //     if (i % 2 == 0 && j % 2 == 0)
-      //       color = "white";
-      //     else if (i % 2 != 0 && j % 2 == 0)
-      //       color = "black";
-      //      if (i == 0) {
-      //        if (row1[j] == 10)
-      //          DrawText("&#x1F4A3;", i * 80, j * 80, color, "12px Arial");
-      //      }
-      //      else if (i == 1) {
-      //        if (row2[j] == 10)
-      //          DrawText("&#x1F4A3;", i * 80, j * 80, color, "30px Arial");
-      //      }
-      //      else if (i == 2) {
-      //        if (row3[j] == 10)
-      //          DrawText("&#x1F4A3;", i * 80, j * 80, color, "30px Arial");
-      //      }
-      //      else if (i == 3) {
-      //        if (row4[j] == 10)
-      //          DrawText("&#x1F4A3;", i * 80, j * 80, color, "30px Arial");
-      //      }
-      //      else if (i == 4) {
-      //        if (row5[j] == 10)
-      //          DrawText("&#x1F4A3;", i * 80, j * 80, color, "30px Arial");
-      //      }
-      //
-      //   }
-      // }
     }
   }
-
-  // DrawText("You have reached Game #3", 40, 250, "24px Arial", "Black");
-  // DrawText("It's going to be bad ass! You'll see.", 40, 290, "24px Arial", "Black");
 }
 
 
