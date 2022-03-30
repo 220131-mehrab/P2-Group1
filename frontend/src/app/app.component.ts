@@ -33,6 +33,21 @@ let squareDancePhase3 = false;
 let squareDancePhase4 = false;
 
 
+/**
+ * Game 1: Pong game variables
+ */
+const PADDLE_WIDTH:number = 100;
+const PADDLE_HEIGHT:number = 10;
+let distance:number = 60;
+let paddleX:number = 220;
+let paddleY:number = 380;
+let ballX: number = 75;
+let ballY: number = 75;
+let ballSpeedX: number = 5;
+let ballSpeedY: number = 7;
+let mouseX:number, mouseY:number;
+
+
 /*
 *   G
 *    a
@@ -237,6 +252,7 @@ window.onload = function() {
 
 function CallAll() {
   textInput1.value = megamanJumpingFrameCount.toString();
+
   addEventListener('keypress', (event) => {
 
     if (gameChoice == 2) {
@@ -277,15 +293,11 @@ function CallAll() {
 }
 
 function ResetGameOne() {
-  squareSpeed = 5;
-  squareX = 0;
-  squareY = 0;
-  squareRight = squareX + SQUARE_WIDTH;
-  squareBottom = squareY + SQUARE_HEIGHT;
-  squareDancePhase1 = true;
-  squareDancePhase2 = false;
-  squareDancePhase3 = false;
-  squareDancePhase4 = false;
+  let ballX: number = 75;
+  let ballY: number = 75;
+  let ballSpeedX: number = 5;
+  let ballSpeedY: number = 7;
+  let mouseX:number, mouseY:number;
 }
 
 function ResetGameTwo() {
@@ -360,24 +372,53 @@ function DrawAll() {
   }
 
   if (gameChoice == 1) {  // Pong Game
+    gameOneReset = false;
+    gameTwoReset = true;
+    gameThreeReset = true;
 
-    const PADDLE_WIDTH = 100;
-    const PADDLE_THICKNESS = 10;
-    const PADDLE_DIST_FROM_EDGE = 60;
-    const PADDLE_HEIGHT = 10;
+    let canvas:HTMLCanvasElement;
+    let ctx:CanvasRenderingContext2D;
 
-    let paddle1Y = 50;
-    let paddle1Top, paddle1Bottom, paddle1Right, paddle1Center;
-    let paddleThickness = 20;
-    let ballX = 75;
-    let ballY = 75;
-    let ballSpeedX = 5;
-    let ballSpeedY = 7;
-    let paddleX = 400;
-    let canvas, canvasContext;
+    let getCanvasElementById = (id : 'SampleGame1') : HTMLCanvasElement => {
+      let canvasGame1 = document.getElementById(id);
+      if (!(canvasGame1 instanceof HTMLCanvasElement)) {
+        throw new Error('Can\'t access "${id}"');
+      }
+      return canvasGame1;
+    };
+    canvas= getCanvasElementById('SampleGame1');
 
-    DrawRectangle(0,0, CANVAS_WIDTH, CANVAS_HEIGHT, 'black'); // Background
-    DrawRectangle(160, 380, PADDLE_WIDTH, PADDLE_HEIGHT, '#0080ee'); // Bottom paddle
+    DrawRectangle(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT, 'black'); // Background
+    DrawRectangle(paddleX, paddleY, 100, 10, '#0080ee'); // Bottom paddle
+    DrawCircle(ballX+=ballSpeedX, ballY+=ballSpeedY, 10, 'white'); // Ball
+    DrawRectangle(paddleX,paddleY,100,10, '#0080ee'); // Background
+
+    canvas.addEventListener('mousemove', function(evt:MouseEvent) {
+      let rect = canvas.getBoundingClientRect(); // Position of mouse on page
+      let root = document.documentElement;
+
+      mouseX = evt.clientX - rect.left - root.scrollLeft;
+      paddleX = mouseX - (PADDLE_WIDTH / 2);
+    });
+
+    if (ballY >= paddleY  && ballX >= paddleX && ballX <= paddleX + PADDLE_WIDTH) {
+      ballSpeedY *= -1;
+    } else if (ballX <= 10 || ballX >= CANVAS_WIDTH - 10) {
+      ballSpeedX *= -1;
+    } else if (ballY <= 10) {
+      ballSpeedY *= -1;
+    } else if (ballY >= CANVAS_HEIGHT - 10) {
+      ballReset();
+    }
+
+
+    function ballReset() {
+      ballX = CANVAS_WIDTH / 2;
+      ballY = CANVAS_HEIGHT / 2;
+    }
+
+
+
 
 
   } else if (gameChoice == 2) { // Megaman Game
@@ -687,7 +728,13 @@ function DrawRectangle(x:number, y:number, width:number, height:number, color:st
     ctxGame1.fillStyle = color;
     ctxGame1.fillRect(x, y, width, height);
   }
+}
 
+function DrawCircle(centerX: number, centerY: number, radius: number, fillColor: string | CanvasGradient | CanvasPattern) {
+  ctxGame1.fillStyle = fillColor;
+  ctxGame1.beginPath();
+  ctxGame1.arc(centerX, centerY, radius, 0, Math.PI*2, true);
+  ctxGame1.fill();
 }
 
 function DrawText(message:string, x:number, y:number, font:string, color:string) {
