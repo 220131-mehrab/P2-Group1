@@ -41,9 +41,7 @@ function updateMousePos(evt) {
 	paddle1Y = mouseY - (PADDLE_HEIGHT / 2);
 }
 
-function Pause(evt) {
-	alert("Pausing...");
-}
+
 
 window.onload = function() {
 	canvas = document.getElementById('pongCanvas');
@@ -53,7 +51,6 @@ window.onload = function() {
 		setInterval(CallAll, 1000/framesPerSecond)
 
 	canvas.addEventListener('mousemove', updateMousePos);
-	canvas.addEventListener('mousedown', Pause);
 }
 
 
