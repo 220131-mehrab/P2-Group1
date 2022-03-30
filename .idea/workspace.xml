@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="de4c7aa5-2dbe-4b34-b5d3-fb457ef9165d" name="Changes" comment="Fixed game 1: pong to work with 1 paddle at the moment">
+    <list default="true" id="de4c7aa5-2dbe-4b34-b5d3-fb457ef9165d" name="Changes" comment="Reformatted all files into frontend folder in preparation for backend spring work.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/game-list/game-list.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/game-list/game-list.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,7 +48,7 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
-    <property name="ts.external.directory.path" value="C:\Users\Minec\Downloads\P2-Group1\frontend\node_modules\typescript\lib" />
+    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\IntelliJ IDEA 2021.3.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -77,7 +78,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1648517560585</updated>
-      <workItem from="1648517562061" duration="49587000" />
+      <workItem from="1648517562061" duration="48726000" />
     </task>
     <task id="LOCAL-00001" summary="Testing">
       <created>1648518234395</created>
@@ -135,14 +136,7 @@
       <option name="project" value="LOCAL" />
       <updated>1648588101784</updated>
     </task>
-    <task id="LOCAL-00009" summary="Fixed game 1: pong to work with 1 paddle at the moment">
-      <created>1648613711286</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1648613711286</updated>
-    </task>
-    <option name="localTasksCounter" value="10" />
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -163,7 +157,6 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Testing" />
     <MESSAGE value="Reformatted all files into frontend folder in preparation for backend spring work." />
-    <MESSAGE value="Fixed game 1: pong to work with 1 paddle at the moment" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed game 1: pong to work with 1 paddle at the moment" />
+    <option name="LAST_COMMIT_MESSAGE" value="Reformatted all files into frontend folder in preparation for backend spring work." />
   </component>
 </project>
