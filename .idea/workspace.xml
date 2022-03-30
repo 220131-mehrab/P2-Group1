@@ -6,8 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="de4c7aa5-2dbe-4b34-b5d3-fb457ef9165d" name="Changes" comment="Reformatted all files into frontend folder in preparation for backend spring work.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/environments/pong.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/environments/pong.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/game-list/game-list.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/game-list/game-list.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +48,7 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
-    <property name="ts.external.directory.path" value="C:\Users\Minec\Downloads\P2-Group1\frontend\node_modules\typescript\lib" />
+    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\IntelliJ IDEA 2021.3.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
